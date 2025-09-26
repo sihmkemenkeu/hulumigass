@@ -1,0 +1,39 @@
+package org.djkn.hulumigas.mapper;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.djkn.hulumigas.entity.KkksHbiLkbunDetail;
+import org.djkn.hulumigas.entity.KkksHbmLkbunDetail1;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@Mapper
+public interface BpmaHbiLkbunDetailMapper {
+	public List<KkksHbiLkbunDetail> getAll(Integer idLkbunMaster,String kertasKerja,String jnsLkpp,String flagIp,String kondisi,String kodeAset, String deskripsi,Integer noMin, Integer noMax);
+	public Integer totalRow(Integer idLkbunMaster,String kertasKerja,String jnsLkpp,String flagIp,String kondisi,String kodeAset, String deskripsi);
+	public Integer cekRowEksis(Integer idLkbunMaster,String kodeAset,String lineNo); //validasi sblm save data
+    //public void generateDataPeriodeSblm(Integer idLkbunMaster);
+	public List<KkksHbiLkbunDetail> getAset(Integer idHbiLkbun);
+	public void editKertasKerja(Integer idHbiLkbun,String kertasKerja, BigDecimal mtstRekonNow, BigDecimal mtskRekonNow, BigDecimal mtstNwjrRekonNow, BigDecimal mtskNwjrRekonNow, BigDecimal prosesHapusNow,String ipNonIp,BigDecimal kursBiNow);
+    public void generateDataBaru(Integer v_id_lkbun_master, String v_nama_user,String v_kode_kkks, String v_bulan, String v_tahun, String v_bulan_prev, String v_tahun_prev);
+    public void generateMutasi(Integer v_id_lkbun_master, String v_nama_user,String v_kode_kkks, String v_bulan, String v_tahun, String v_bulan_prev, String v_tahun_prev);
+    public void koreksiManual(Integer v_id_lkbun_master);
+    public void updateMutasi(Integer idLkbunMaster);
+    public void updateKurs(Integer v_id_lkbun_master);
+    public void updateIp(Integer v_id_lkbun_master);
+    public void updateNilWjr(Integer v_id_lkbun_master);
+    public void updateMasaMft(Integer v_id_lkbun_master);
+    public void hitungSusut(Integer v_id_lkbun_master);
+    public void hitungNilBuku(Integer v_id_lkbun_master,String v_bulan);
+    public void kembaliKeKoreksiManual(Integer v_id_lkbun_master);
+    public void ubahNeracaCalk(Integer v_id_Hbi_lkbun, String v_neraca_calk, String v_ket_mts_now);
+    public void updateManualReklas(Integer v_id_Hbi_lkbun,BigDecimal v_kurs_bi,String v_kode_asset_line, String v_trx_manual,String v_jns_lkpp,String v_jns_lkpp1,String v_kertas_kerja,String v_kertas_kerja1,BigDecimal v_mtst_rekon_now,BigDecimal v_mtst_nwjr_rekon_now,BigDecimal v_mtsk_rekon_now,BigDecimal v_mtsk_nwjr_rekon_now,BigDecimal v_proses_hapus_now,BigDecimal v_mtsk_nwjr_proses_hps_now,BigDecimal v_mtsk_nwjr_pbaik_kurs_now,String v_ket_mts_now,String v_bln_ip,String v_thn_ip,String v_kondisi);
+    public void updateManualNonReklas(Integer v_id_Hbi_lkbun,BigDecimal v_kurs_bi,String v_kode_asset_line, String v_trx_manual,String v_jns_lkpp,String v_jns_lkpp1,String v_kertas_kerja,String v_kertas_kerja1,BigDecimal v_mtst_rekon_now,BigDecimal v_mtst_nwjr_rekon_now,BigDecimal v_mtsk_rekon_now,BigDecimal v_mtsk_nwjr_rekon_now,BigDecimal v_proses_hapus_now,BigDecimal v_mtsk_nwjr_proses_hps_now,BigDecimal v_mtsk_nwjr_pbaik_kurs_now,String v_ket_mts_now,String v_bln_ip,String v_thn_ip,String v_kondisi);
+    public Boolean importData(@RequestBody List<KkksHbiLkbunDetail> dataList);
+    public void upload(KkksHbiLkbunDetail1 list);
+    public void deleteById(Integer idLkbunMaster);
+    public void koreksiManualNilWjr1(Long idHbiLkbun,BigDecimal mtstNwjrTrfInNow,BigDecimal mtstNwjrAlihTrmNow,String ketMtsNow,String koreksiManual1);
+    public void koreksiKategoriTglPis(Long idHbiLkbun,String blnPerolehan,String thnPerolehan,String categoryCode,String ketMtsNow);
+}
+ 

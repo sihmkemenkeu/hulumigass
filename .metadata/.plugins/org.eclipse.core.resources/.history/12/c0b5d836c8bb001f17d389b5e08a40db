@@ -1,0 +1,377 @@
+package org.djkn.hulumigas.controller;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+
+import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.djkn.hulumigas.entity.BpmaTanah;
+//import org.djkn.hulumigas.entity.KkksHbmLkbunDetail1;
+import org.djkn.hulumigas.entity.KkksTanahLkbunDetail;
+//import org.djkn.hulumigas.entity.PbTanah;
+import org.djkn.hulumigas.entity.PbTanahMutasiDetail;
+//import org.djkn.hulumigas.service.BpmaTanahLkbunDetailService;
+//import org.djkn.hulumigas.entity.KkksHbmPenilaianDetail;
+//import org.djkn.hulumigas.service.KkksHbmLkbunDetailService;
+import org.djkn.hulumigas.service.KkksTanahLkbunDetailService;
+import org.djkn.hulumigas.service.PbTanahLkbunDetailService;
+import org.djkn.hulumigas.service.PbTanahMutasiDetailService;
+//import org.djkn.hulumigas.service.KkksHbmPenilaianService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+@Controller
+public class PbTanahMutasiDetailImportExcel {
+	@Autowired
+	private PbTanahMutasiDetailService pbTanahMutasiDetailService;
+	//ResponseEntity<List<KkksHbmPenilaianDetail>> 
+	
+	@RequestMapping(value = "/import-excel-pb-tanah-mutasi", method = RequestMethod.POST)
+	@ResponseBody
+	public String importExcelFile(@RequestParam("excelFileLkbun") MultipartFile files, HttpSession session) throws IOException {
+	       //HttpStatus status = HttpStatus.OK;
+        List<PbTanahMutasiDetail> productList = new ArrayList<>();
+
+        XSSFWorkbook workbook = new XSSFWorkbook(files.getInputStream());
+        XSSFSheet worksheet = workbook.getSheetAt(0);
+        String msg = "Y";
+        for (int index = 0; index <= worksheet.getLastRowNum(); index++) {
+            if (index > 0) {
+            	PbTanahMutasiDetail product = new PbTanahMutasiDetail();
+
+                XSSFRow row = worksheet.getRow(index);
+                //Long id = new Double(row.getCell(0).getNumericCellValue()).longValue(); //cast double to Long
+                //defaultValueIfNull
+                
+                product.setIdLkbunMaster(Double.valueOf(row.getCell(1).getNumericCellValue()).longValue());
+                // Create the cell if it doesn’t exist
+                Cell cell2 = row.getCell(2);
+                if (cell2 == null) {
+                	cell2 = row.createCell(2);
+                	// Update the cell’s value
+                    //cell.setCellType 21(CellType.STRING)
+                    //cell2.setCellValue("");
+                    //msg = "row "+String.valueOf(index)+" col 2";
+                    //break;
+                }
+                
+                Cell cell3 = row.getCell(3);
+                if (cell3 == null) {
+                	cell3 = row.createCell(3);
+                	//cell3.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 3";
+                	//break;
+                }
+                
+                Cell cell4 = row.getCell(4);
+                if (cell4 == null) {
+                	cell4 = row.createCell(4);
+                	//cell4.setCellValue("");
+                	msg = "row "+String.valueOf(index)+" col 4";
+                	break;
+                }
+                
+                Cell cell5 = row.getCell(5);
+                if (cell5 == null) {
+                	cell5 = row.createCell(5);
+                	//cell5.setCellValue("");
+                	msg = "row "+String.valueOf(index)+" col 5";
+                	break;
+                }
+                
+                Cell cell6 = row.getCell(6);
+                if (cell6 == null) {
+                	cell6 = row.createCell(6);
+                	//cell6.setCellValue("");
+                	msg = "row "+String.valueOf(index)+" col 6";
+                	break;
+                }
+                
+                Cell cell7 = row.getCell(7);
+                if (cell7 == null) {
+                	cell7 = row.createCell(7);
+                	//cell7.setCellValue("");
+                	msg = "row "+String.valueOf(index)+" col 7";
+                	break;
+                }
+                
+                Cell cell8 = row.getCell(8);
+                if (cell8 == null) {
+                	cell8 = row.createCell(8);
+                	//cell8.setCellValue("");
+                	msg = "row "+String.valueOf(index)+" col 8";
+                	break;
+                }
+                
+                Cell cell9 = row.getCell(9);
+                if (cell9 == null) {
+                	cell9 = row.createCell(9);
+                	//cell9.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 9";
+                	//break;
+                }
+                
+                Cell cell10 = row.getCell(10);
+                if (cell10 == null) {
+                	cell10 = row.createCell(10);
+                	//cell10.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 10";
+                	//break;
+                }
+                
+                Cell cell11 = row.getCell(11);
+                if (cell11 == null) {
+                	cell11 = row.createCell(11);
+                	//cell11.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 11";
+                	//break;
+                }
+                
+                Cell cell12 = row.getCell(12);
+                if (cell12 == null) {
+                	cell12 = row.createCell(12);
+                	//cell12.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 12";
+                	//break;
+                }
+                
+                Cell cell13 = row.getCell(13);
+                if (cell13 == null) {
+                	cell13 = row.createCell(13);
+                	//cell13.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 13";
+                	//break;
+                }
+                
+                Cell cell14 = row.getCell(14);
+                if (cell14 == null) {
+                	cell14 = row.createCell(14);
+                	//cell14.setCellValue(0);
+                	//msg = "row "+String.valueOf(index)+" col 14";
+                	//break;
+                }
+                
+                Cell cell15 = row.getCell(15);
+                if (cell15 == null) {
+                	cell15 = row.createCell(15);
+                	//cell15.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 15";
+                	//break;
+                }
+                
+                Cell cell16 = row.getCell(16);
+                if (cell16 == null) {
+                	cell16 = row.createCell(16);
+                	//cell16.setCellValue("");
+                	//msg = "row "+String.valueOf(index)+" col 16";
+                	//break;
+                }
+                
+                Cell cell17 = row.getCell(17);
+                if (cell17 == null) {
+                	cell17 = row.createCell(17);
+                	//cell17.setCellValue("");
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 17";
+                	//break;
+                }
+                
+                Cell cell18 = row.getCell(18);
+                if (cell18 == null) {
+                	cell18 = row.createCell(18);
+                	//cell18.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 18";
+                	//break;
+                }
+                
+                Cell cell19 = row.getCell(19);	
+                if (cell19 == null) {	
+                	cell19 = row.createCell(19);
+                	//cell19.setCellValue('"');
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 19";
+                	//break;
+                }	
+
+                Cell cell20 = row.getCell(20);	
+                if (cell20 == null) {	
+                	cell20 = row.createCell(20);
+                	//cell20.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 20";
+                	//break;
+                }	
+
+                Cell cell21 = row.getCell(21);	
+                if (cell21 == null) {	
+                	cell21 = row.createCell(21);
+                	//cell21.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 21";
+                	//break;
+                }	
+
+                Cell cell22 = row.getCell(22);	
+                if (cell22 == null) {	
+                	cell22 = row.createCell(22);
+                	//cell22.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 22";
+                	//break;
+                }	
+
+                Cell cell23 = row.getCell(23);	
+                if (cell23 == null) {	
+                	cell23 = row.createCell(23);
+                	//cell23.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 23";
+                	//break;
+                }	
+
+                Cell cell24 = row.getCell(24);	
+                if (cell24 == null) {	
+                	cell24 = row.createCell(24);
+                	//cell24.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 24";
+                	//break;
+                }	
+
+                Cell cell25 = row.getCell(25);	
+                if (cell25 == null) {	
+                	cell25 = row.createCell(25);
+                	//cell25.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 25";
+                	//break;
+                }	
+
+                Cell cell26 = row.getCell(26);	
+                if (cell26 == null) {	
+                	cell26 = row.createCell(26);
+                	//cell26.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 26";
+                	//break;
+                }	
+
+                Cell cell27 = row.getCell(27);	
+                if (cell27 == null) {	
+                	cell27 = row.createCell(27);
+                	//cell27.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 27";
+                	//break;
+                }	
+
+                Cell cell28 = row.getCell(28);	
+                if (cell28 == null) {	
+                	cell28 = row.createCell(28);
+                	//cell28.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 28";
+                	//break;
+                }	
+
+                Cell cell29 = row.getCell(29);	
+                if (cell29 == null) {	
+                	cell29 = row.createCell(29);
+                	//cell29.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 29";
+                	//break;
+                }	
+
+                Cell cell30 = row.getCell(30);	
+                if (cell30 == null) {	
+                	cell30 = row.createCell(30);
+                	//cell30.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = "row "+String.valueOf(index)+" col 30";
+                	//break;
+                }	
+                
+                Cell cell31 = row.getCell(31);	
+                if (cell31 == null) {	
+                	cell31 = row.createCell(31);
+                	//cell31.setCellValue(0);
+                	//validasi cell kosong
+                	//msg = String.valueOf(index);
+                	//break;
+                }	
+
+                
+                
+                product.setJnsLkpp(row.getCell(2).getStringCellValue());
+                product.setKertasKerja(row.getCell(3).getStringCellValue());
+                product.setPscid(row.getCell(4).getStringCellValue());
+                product.setBlockcode(row.getCell(5).getStringCellValue());
+                product.setKodeKkks(row.getCell(6).getStringCellValue());
+                product.setTahun(row.getCell(7, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setBulan(row.getCell(8, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setKodeBarang(row.getCell(9, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setNamaBarang(row.getCell(10, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setLokasi(row.getCell(11, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                
+                product.setLuasAwal(new BigDecimal(row.getCell(12, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setLuasMtsPlus(new BigDecimal(row.getCell(13, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setLuasMtsMin(new BigDecimal(row.getCell(14, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setLuasAkhir(new BigDecimal(row.getCell(15, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                
+                product.setTglPrlh(row.getCell(16, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getDateCellValue());
+                
+                product.setPrlhAwal(new BigDecimal(row.getCell(17, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setPrlhMtsPlus(new BigDecimal(row.getCell(18, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setPrlhMtsMin(new BigDecimal(row.getCell(19, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setPrlhAkhir(new BigDecimal(row.getCell(20, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                
+                product.setTglIp(row.getCell(21, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getDateCellValue());
+                product.setNilaiWajar(new BigDecimal(row.getCell(22, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+                product.setKepemlknStatusnow(row.getCell(23, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setKepemlknNoTgl(row.getCell(24, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setKepemlknNama(row.getCell(25, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setPeruntukan(row.getCell(26, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setKondisi(row.getCell(27, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setPermasalahan(row.getCell(28, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setStatusSertifPemerintah(row.getCell(29, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setKetMutasi(row.getCell(30, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+                product.setTglPelaporan(row.getCell(31, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getDateCellValue());
+                
+               
+                //cuid cdate
+                String vstatusdata = "1";
+        		String vcuid = (String) session.getAttribute("attr_nama");
+        		Date vcdate = new Date();
+        		product.setCuid(vcuid);
+        		product.setCdate(vcdate);
+        		product.setStatusData(vstatusdata);
+        		//System.out.println("product: "+product.getKodeAsset());
+                //productList.add(product);
+                //save one by one instead of all by one
+                 pbTanahMutasiDetailService.upload(product);
+            }
+            
+            workbook.close();
+        }
+
+        //kkksHbmPenilaianService.upload(productList);
+        //return new ResponseEntity<>(productList, status);
+        return msg;
+    }
+}

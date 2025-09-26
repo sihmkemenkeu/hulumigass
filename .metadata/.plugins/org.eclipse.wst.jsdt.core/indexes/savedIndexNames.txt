@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\ade.fikri\eclipse-hulumigasss\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1680351447.index
+2343478443.index
+1654738981.index
+297704812.index
+3805680806.index
+3050332960.index

@@ -1,0 +1,821 @@
+package org.djkn.hulumigas.controller;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.djkn.hulumigas.entity.KkksHbmLkbunDetail1;
+//import org.djkn.hulumigas.entity.KkksHbmPenilaianDetail;
+//import org.djkn.hulumigas.service.KkksHbmLkbunDetailService;
+import org.djkn.hulumigas.service.PbHbmMutasiDetailService;
+//import org.djkn.hulumigas.service.KkksHbmPenilaianService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+@Controller
+public class PbHbiMutasiDetailImportExcel {
+	@Autowired
+	private PbHbmMutasiDetailService pbHbmMutasiDetailService;
+	//ResponseEntity<List<KkksHbmPenilaianDetail>> 
+	
+	@RequestMapping(value = "/import-excel-pb-hbm-mutasi", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseBody
+	public String importExcelFile(@RequestParam("excelFileLkbun") MultipartFile files, 
+			@RequestParam("_idLkbunMaster") Long _idLkbunMaster, HttpSession session) throws IOException{
+		
+		try {
+			
+			//HttpStatus status = HttpStatus.OK;
+	        List<KkksHbmLkbunDetail1> productList = new ArrayList<>();
+
+	        XSSFWorkbook workbook = new XSSFWorkbook(files.getInputStream());
+	        XSSFSheet worksheet = workbook.getSheetAt(0);
+	        String msg = "Y";
+	        for (int index = 0; index <= worksheet.getLastRowNum(); index++) {
+	            if (index > 0) {
+	            	KkksHbmLkbunDetail1 product = new KkksHbmLkbunDetail1();
+
+	                XSSFRow row = worksheet.getRow(index);
+	                //Long id = new Double(row.getCell(0).getNumericCellValue()).longValue(); //cast double to Long
+	                //defaultValueIfNull
+	                
+	                //product.setIdLkbunMaster(Double.valueOf(row.getCell(1).getNumericCellValue()).longValue());
+	                // Create the cell if it doesn’t exist
+	                Cell cell2 = row.getCell(2);
+	                if (cell2 == null) {
+	                	cell2 = row.createCell(2);
+	                	// Update the cell’s value
+	                    //cell.setCellType 21(CellType.STRING)
+	                    //cell2.setCellValue("");
+	                    //msg = "row "+String.valueOf(index)+" col 2";
+	                    //break;
+	                }
+	                
+	                Cell cell3 = row.getCell(3);
+	                if (cell3 == null) {
+	                	cell3 = row.createCell(3);
+	                	//cell3.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 3";
+	                	//break;
+	                }
+	                
+	                Cell cell4 = row.getCell(4);
+	                if (cell4 == null) {
+	                	cell4 = row.createCell(4);
+	                	//cell4.setCellValue("");
+	                	msg = "row "+String.valueOf(index)+" col 4";
+	                	break;
+	                }
+	                
+	                Cell cell5 = row.getCell(5);
+	                if (cell5 == null) {
+	                	cell5 = row.createCell(5);
+	                	//cell5.setCellValue("");
+	                	msg = "row "+String.valueOf(index)+" col 5";
+	                	break;
+	                }
+	                
+	                Cell cell6 = row.getCell(6);
+	                if (cell6 == null) {
+	                	cell6 = row.createCell(6);
+	                	//cell6.setCellValue("");
+	                	msg = "row "+String.valueOf(index)+" col 6";
+	                	break;
+	                }
+	                
+	                Cell cell7 = row.getCell(7);
+	                if (cell7 == null) {
+	                	cell7 = row.createCell(7);
+	                	//cell7.setCellValue("");
+	                	msg = "row "+String.valueOf(index)+" col 7";
+	                	break;
+	                }
+	                
+	                Cell cell8 = row.getCell(8);
+	                if (cell8 == null) {
+	                	cell8 = row.createCell(8);
+	                	//cell8.setCellValue("");
+	                	msg = "row "+String.valueOf(index)+" col 8";
+	                	break;
+	                }
+	                
+	                Cell cell9 = row.getCell(9);
+	                if (cell9 == null) {
+	                	cell9 = row.createCell(9);
+	                	//cell9.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 9";
+	                	//break;
+	                }
+	                
+	                Cell cell10 = row.getCell(10);
+	                if (cell10 == null) {
+	                	cell10 = row.createCell(10);
+	                	//cell10.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 10";
+	                	//break;
+	                }
+	                
+	                Cell cell11 = row.getCell(11);
+	                if (cell11 == null) {
+	                	cell11 = row.createCell(11);
+	                	//cell11.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 11";
+	                	//break;
+	                }
+	                
+	                Cell cell12 = row.getCell(12);
+	                if (cell12 == null) {
+	                	cell12 = row.createCell(12);
+	                	//cell12.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 12";
+	                	//break;
+	                }
+	                
+	                Cell cell13 = row.getCell(13);
+	                if (cell13 == null) {
+	                	cell13 = row.createCell(13);
+	                	//cell13.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 13";
+	                	//break;
+	                }
+	                
+	                Cell cell14 = row.getCell(14);
+	                if (cell14 == null) {
+	                	cell14 = row.createCell(14);
+	                	//cell14.setCellValue(0);
+	                	//msg = "row "+String.valueOf(index)+" col 14";
+	                	//break;
+	                }
+	                
+	                Cell cell15 = row.getCell(15);
+	                if (cell15 == null) {
+	                	cell15 = row.createCell(15);
+	                	//cell15.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 15";
+	                	//break;
+	                }
+	                
+	                Cell cell16 = row.getCell(16);
+	                if (cell16 == null) {
+	                	cell16 = row.createCell(16);
+	                	//cell16.setCellValue("");
+	                	//msg = "row "+String.valueOf(index)+" col 16";
+	                	//break;
+	                }
+	                
+	                Cell cell17 = row.getCell(17);
+	                if (cell17 == null) {
+	                	cell17 = row.createCell(17);
+	                	//cell17.setCellValue("");
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 17";
+	                	//break;
+	                }
+	                
+	                Cell cell18 = row.getCell(18);
+	                if (cell18 == null) {
+	                	cell18 = row.createCell(18);
+	                	//cell18.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 18";
+	                	//break;
+	                }
+	                
+	                Cell cell19 = row.getCell(19);	
+	                if (cell19 == null) {	
+	                	cell19 = row.createCell(19);
+	                	//cell19.setCellValue('"');
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 19";
+	                	//break;
+	                }	
+
+	                Cell cell20 = row.getCell(20);	
+	                if (cell20 == null) {	
+	                	cell20 = row.createCell(20);
+	                	//cell20.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 20";
+	                	//break;
+	                }	
+
+	                Cell cell21 = row.getCell(21);	
+	                if (cell21 == null) {	
+	                	cell21 = row.createCell(21);
+	                	//cell21.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 21";
+	                	//break;
+	                }	
+
+	                Cell cell22 = row.getCell(22);	
+	                if (cell22 == null) {	
+	                	cell22 = row.createCell(22);
+	                	//cell22.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 22";
+	                	//break;
+	                }	
+
+	                Cell cell23 = row.getCell(23);	
+	                if (cell23 == null) {	
+	                	cell23 = row.createCell(23);
+	                	//cell23.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 23";
+	                	//break;
+	                }	
+
+	                Cell cell24 = row.getCell(24);	
+	                if (cell24 == null) {	
+	                	cell24 = row.createCell(24);
+	                	//cell24.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 24";
+	                	//break;
+	                }	
+
+	                Cell cell25 = row.getCell(25);	
+	                if (cell25 == null) {	
+	                	cell25 = row.createCell(25);
+	                	//cell25.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 25";
+	                	//break;
+	                }	
+
+	                Cell cell26 = row.getCell(26);	
+	                if (cell26 == null) {	
+	                	cell26 = row.createCell(26);
+	                	//cell26.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 26";
+	                	//break;
+	                }	
+
+	                Cell cell27 = row.getCell(27);	
+	                if (cell27 == null) {	
+	                	cell27 = row.createCell(27);
+	                	//cell27.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 27";
+	                	//break;
+	                }	
+
+	                Cell cell28 = row.getCell(28);	
+	                if (cell28 == null) {	
+	                	cell28 = row.createCell(28);
+	                	//cell28.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 28";
+	                	//break;
+	                }	
+
+	                Cell cell29 = row.getCell(29);	
+	                if (cell29 == null) {	
+	                	cell29 = row.createCell(29);
+	                	//cell29.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 29";
+	                	//break;
+	                }	
+
+	                Cell cell30 = row.getCell(30);	
+	                if (cell30 == null) {	
+	                	cell30 = row.createCell(30);
+	                	//cell30.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = "row "+String.valueOf(index)+" col 30";
+	                	//break;
+	                }	
+	                
+	                Cell cell31 = row.getCell(31);	
+	                if (cell31 == null) {	
+	                	cell31 = row.createCell(31);
+	                	//cell31.setCellValue(0);
+	                	//validasi cell kosong
+	                	//msg = String.valueOf(index);
+	                	//break;
+	                }	
+
+	                Cell cell32 = row.getCell(32);	
+	                if (cell32 == null) {	
+	                	cell32 = row.createCell(32);
+	                	
+	                }	
+
+	                Cell cell33 = row.getCell(33);	
+	                if (cell33 == null) {	
+	                	cell33 = row.createCell(33);
+	                	
+	                }	
+
+	                Cell cell34 = row.getCell(34);	
+	                if (cell34 == null) {	
+	                	cell34 = row.createCell(34);
+	                	
+	                }	
+
+	                Cell cell35 = row.getCell(35);	
+	                if (cell35 == null) {	
+	                	cell35 = row.createCell(35);
+	                	
+	                }	
+
+	                Cell cell36 = row.getCell(36);	
+	                if (cell36 == null) {	
+	                	cell36 = row.createCell(36);
+	                	
+	                }	
+
+	                Cell cell37 = row.getCell(37);	
+	                if (cell37 == null) {	
+	                	cell37 = row.createCell(37);
+	                	
+	                }	
+
+	                Cell cell38 = row.getCell(38);	
+	                if (cell38 == null) {	
+	                	cell38 = row.createCell(38);
+	                	
+	                }	
+
+	                Cell cell39 = row.getCell(39);	
+	                if (cell39 == null) {	
+	                	cell39 = row.createCell(39);
+	                	
+	                }	
+
+	                Cell cell40 = row.getCell(40);	
+	                if (cell40 == null) {	
+	                	cell40 = row.createCell(40);
+	                	
+	                }	
+
+	                Cell cell41 = row.getCell(41);	
+	                if (cell41 == null) {	
+	                	cell41 = row.createCell(41);
+	                	
+	                }	
+
+	                Cell cell42 = row.getCell(42);	
+	                if (cell42 == null) {	
+	                	cell42 = row.createCell(42);
+	                	
+	                }	
+
+	                Cell cell43 = row.getCell(43);	
+	                if (cell43 == null) {	
+	                	cell43 = row.createCell(43);
+	                	
+	                }	
+
+	                Cell cell44 = row.getCell(44);	
+	                if (cell44 == null) {	
+	                	cell44 = row.createCell(44);
+	                	
+	                }	
+
+	                Cell cell45 = row.getCell(45);	
+	                if (cell45 == null) {	
+	                	cell45 = row.createCell(45);
+	                	
+	                }	
+
+	                Cell cell46 = row.getCell(46);	
+	                if (cell46 == null) {	
+	                	cell46 = row.createCell(46);
+	                	
+	                }	
+
+	                Cell cell47 = row.getCell(47);	
+	                if (cell47 == null) {	
+	                	cell47 = row.createCell(47);
+	                	
+	                }	
+
+	                Cell cell48 = row.getCell(48);	
+	                if (cell48 == null) {	
+	                	cell48 = row.createCell(48);
+	                	
+	                }	
+
+	                Cell cell49 = row.getCell(49);	
+	                if (cell49 == null) {	
+	                	cell49 = row.createCell(49);
+	                	
+	                }	
+
+	                Cell cell50 = row.getCell(50);	
+	                if (cell50 == null) {	
+	                	cell50 = row.createCell(50);
+	                	
+	                }	
+
+	                Cell cell51 = row.getCell(51);	
+	                if (cell51 == null) {	
+	                	cell51 = row.createCell(51);
+	                	
+	                }	
+
+	                Cell cell52 = row.getCell(52);	
+	                if (cell52 == null) {	
+	                	cell52 = row.createCell(52);
+	                	
+	                }	
+
+	                Cell cell53 = row.getCell(53);	
+	                if (cell53 == null) {	
+	                	cell53 = row.createCell(53);
+	                	
+	                }	
+
+	                Cell cell54 = row.getCell(54);	
+	                if (cell54 == null) {	
+	                	cell54 = row.createCell(54);
+	                	
+	                }	
+
+	                Cell cell55 = row.getCell(55);	
+	                if (cell55 == null) {	
+	                	cell55 = row.createCell(55);
+	                	
+	                }	
+
+	                Cell cell56 = row.getCell(56);	
+	                if (cell56 == null) {	
+	                	cell56 = row.createCell(56);
+	                	
+	                }	
+
+	                Cell cell57 = row.getCell(57);	
+	                if (cell57 == null) {	
+	                	cell57 = row.createCell(57);
+	                	
+	                }	
+
+	                Cell cell58 = row.getCell(58);	
+	                if (cell58 == null) {	
+	                	cell58 = row.createCell(58);
+	                	
+	                }	
+
+	                Cell cell59 = row.getCell(59);	
+	                if (cell59 == null) {	
+	                	cell59 = row.createCell(59);
+	                	
+	                }	
+
+	                Cell cell60 = row.getCell(60);	
+	                if (cell60 == null) {	
+	                	cell60 = row.createCell(60);
+	                	
+	                }	
+
+	                Cell cell61 = row.getCell(61);	
+	                if (cell61 == null) {	
+	                	cell61 = row.createCell(61);
+	                	
+	                }	
+
+	                Cell cell62 = row.getCell(62);	
+	                if (cell62 == null) {	
+	                	cell62 = row.createCell(62);
+	                	
+	                }	
+
+	                Cell cell63 = row.getCell(63);	
+	                if (cell63 == null) {	
+	                	cell63 = row.createCell(63);
+	                	
+	                }	
+
+	                Cell cell64 = row.getCell(64);	
+	                if (cell64 == null) {	
+	                	cell64 = row.createCell(64);
+	                	
+	                }	
+	                
+	                Cell cell65 = row.getCell(65);	
+	                if (cell65 == null) {	
+	                cell65 = row.createCell(65);
+	                }
+	                Cell cell66 = row.getCell(66);	
+	                if (cell66 == null) {	
+	                cell66 = row.createCell(66);
+	                }
+	                Cell cell67 = row.getCell(67);	
+	                if (cell67 == null) {	
+	                	cell67 = row.createCell(67);
+	                	
+	                }
+	                Cell cell68 = row.getCell(68);	
+	                if (cell68 == null) {	
+	                	cell68 = row.createCell(68);
+	                	
+	                }
+	                Cell cell69 = row.getCell(69);	
+	                if (cell69 == null) {	
+	                	cell69 = row.createCell(69);
+	                	
+	                }
+	                Cell cell70 = row.getCell(70);	
+	                if (cell70 == null) {	
+	                	cell70 = row.createCell(70);
+	                	
+	                }
+	                Cell cell71 = row.getCell(71);	
+	                if (cell71 == null) {	
+	                	cell71 = row.createCell(71);
+	                	
+	                }
+	                Cell cell72 = row.getCell(72);	
+	                if (cell72 == null) {	
+	                	cell72 = row.createCell(72);
+	                	
+	                }
+	                Cell cell73 = row.getCell(73);	
+	                if (cell73 == null) {	
+	                	cell73 = row.createCell(73);
+	                	
+	                }
+	                Cell cell74 = row.getCell(74);	
+	                if (cell74 == null) {	
+	                	cell74 = row.createCell(74);
+	                	
+	                }
+	                Cell cell75 = row.getCell(75);	
+	                if (cell75 == null) {	
+	                	cell75 = row.createCell(75);
+	                	
+	                }
+	                Cell cell76 = row.getCell(76);	
+	                if (cell76 == null) {	
+	                	cell76 = row.createCell(76);
+	                	
+	                }
+	                Cell cell77 = row.getCell(77);	
+	                if (cell77 == null) {	
+	                	cell77 = row.createCell(77);
+	                	
+	                }
+	                Cell cell78 = row.getCell(78);	
+	                if (cell78 == null) {	
+	                	cell78 = row.createCell(78);
+	                	
+	                }
+	                Cell cell79 = row.getCell(79);	
+	                if (cell79 == null) {	
+	                	cell79 = row.createCell(79);
+	                	
+	                }
+	                Cell cell80 = row.getCell(80);	
+	                if (cell80 == null) {	
+	                	cell80 = row.createCell(80);
+	                	
+	                }
+	                Cell cell81 = row.getCell(81);	
+	                if (cell81 == null) {	
+	                	cell81 = row.createCell(81);
+	                	
+	                }
+	                Cell cell82 = row.getCell(82);	
+	                if (cell82 == null) {	
+	                	cell82 = row.createCell(82);
+	                	
+	                }
+	                Cell cell83 = row.getCell(83);	
+	                if (cell83 == null) {	
+	                	cell83 = row.createCell(83);
+	                	
+	                }
+	                Cell cell84 = row.getCell(84);	
+	                if (cell84 == null) {	
+	                	cell84 = row.createCell(84);
+	                	
+	                }
+	                Cell cell85 = row.getCell(85);	
+	                if (cell85 == null) {	
+	                	cell85 = row.createCell(85);
+	                	
+	                }
+	                Cell cell86 = row.getCell(86);	
+	                if (cell86 == null) {	
+	                	cell86 = row.createCell(86);
+	                	
+	                }
+	                Cell cell87 = row.getCell(87);	
+	                if (cell87 == null) {	
+	                	cell87 = row.createCell(87);
+	                	
+	                }
+	                Cell cell88 = row.getCell(88);	
+	                if (cell88 == null) {	
+	                	cell88 = row.createCell(88);
+	                	
+	                }
+	                Cell cell89 = row.getCell(89);	
+	                if (cell89 == null) {	
+	                	cell89 = row.createCell(89);
+	                	
+	                }
+	                Cell cell90 = row.getCell(90);	
+	                if (cell90 == null) {	
+	                	cell90 = row.createCell(90);
+	                	
+	                }
+	                Cell cell91 = row.getCell(91);	
+	                if (cell91 == null) {	
+	                	cell91 = row.createCell(91);
+	                	
+	                }
+	                Cell cell92 = row.getCell(92);	
+	                if (cell92 == null) {	
+	                	cell92 = row.createCell(92);
+	                	
+	                }
+	                Cell cell93 = row.getCell(93);	
+	                if (cell93 == null) {	
+	                	cell93 = row.createCell(93);
+	                	
+	                }
+	                Cell cell94 = row.getCell(94);	
+	                if (cell94 == null) {	
+	                	cell94 = row.createCell(94);
+	                	
+	                }
+	                Cell cell95 = row.getCell(95);	
+	                if (cell95 == null) {	
+	                	cell95 = row.createCell(95);
+	                	
+	                }
+	                
+	                product.setJnsLkpp(row.getCell(2).getStringCellValue());
+	                product.setKertasKerja(row.getCell(3).getStringCellValue());
+	                product.setPscid(row.getCell(4).getStringCellValue());
+	                product.setBlockcode(row.getCell(5).getStringCellValue());
+	                product.setKodeKkks(row.getCell(6).getStringCellValue());
+	                product.setLineNo(row.getCell(7).getStringCellValue());
+	                product.setKodeAsset(row.getCell(8).getStringCellValue());
+	                
+	                product.setTahun(row.getCell(9, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setBulan(row.getCell(10, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setKodeAssetLine(row.getCell(11, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setKodeAssetLama(row.getCell(12, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setCategoryCode(row.getCell(13, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setDeskripsiAsset(row.getCell(14, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                
+	                product.setLokasi(row.getCell(15, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setMerk(row.getCell(16, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setTipe(row.getCell(17, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setRemark(row.getCell(18, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setJumlah(Double.valueOf(row.getCell(19, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()).longValue());
+	                product.setSatuan(row.getCell(20, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setIndeksKoreksi(row.getCell(21, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setStatusPenggunaan(row.getCell(22, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setTglPerolehan(row.getCell(23, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getDateCellValue());
+	                product.setBlnPerolehan(row.getCell(24, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                String s1 = row.getCell(24, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString();
+	                String s11 = s1.length() >= 3 ? s1.substring(0,s1.length()-2): s1;
+	                String s12 = s11;
+	                if(s11.length()==1) {
+	                	 s12 = "0"+s11;
+	                } 
+	                product.setBlnPerolehan(s12);
+	                
+	                //product.setThnPerolehan(row.getCell(25, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                String s2 = row.getCell(25, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString();
+	                String s21 = s2.length() >= 5 ? s2.substring(0,s2.length()-2): s2;
+	                product.setThnPerolehan(s21);
+	                
+	                product.setFlagIp(row.getCell(26, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                
+	                //product.setBlnIp(String.valueOf(row.getCell(27, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString()));
+	                String s3 = row.getCell(27, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString();
+	                String s31 = s3.length() >= 3 ? s3.substring(0,s3.length()-2): s3;
+	                String s32 = s31;
+	                if(s31.length()==1) {
+	                	 s32 = "0"+s31;
+	                } 
+	                product.setBlnIp(s32);
+	               
+	                //product.setThnIp(row.getCell(28, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                String s4 = row.getCell(28, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString();
+	                String s41 = s4.length() >= 5 ? s4.substring(0,s4.length()-2): s4;
+	                product.setThnIp(s41);
+	                
+	                product.setKondisi(row.getCell(29, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setNprlPrev(new BigDecimal(row.getCell(30, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                
+	                product.setMtstRekonNow(new BigDecimal(row.getCell(31, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstPisNow(new BigDecimal(row.getCell(32, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstPisOldNow(new BigDecimal(row.getCell(33, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstKoreksiNow(new BigDecimal(row.getCell(34, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstTrfInNow(new BigDecimal(row.getCell(35, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstSlsBltNow(new BigDecimal(row.getCell(36, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstSeNow(new BigDecimal(row.getCell(37, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstSeOldNow(new BigDecimal(row.getCell(38, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstAlihTrmNow(new BigDecimal(row.getCell(39, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskRekonNow(new BigDecimal(row.getCell(40, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskHapusNow(new BigDecimal(row.getCell(41, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskTrfOutNow(new BigDecimal(row.getCell(42, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskSlsBltNow(new BigDecimal(row.getCell(43, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskKoreksiNow(new BigDecimal(row.getCell(44, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskAlihSrhNow(new BigDecimal(row.getCell(45, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setProsesHapusNow(new BigDecimal(row.getCell(46, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setNprlNow(new BigDecimal(row.getCell(47, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setPeriodeMtsNow(row.getCell(48, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                product.setKetMtsNow(row.getCell(49, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                //System.out.println("KursBiNow " +new BigDecimal(row.getCell(50, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setKursBiNow(new BigDecimal(row.getCell(50, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setNwjrLkbunPrev(new BigDecimal(row.getCell(51, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrRekonNow(new BigDecimal(row.getCell(52, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrPisNow(new BigDecimal(row.getCell(53, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrPisOldNow(new BigDecimal(row.getCell(54, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrKoreksiNow(new BigDecimal(row.getCell(55, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrTrfInNow(new BigDecimal(row.getCell(56, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrSlsBltNow(new BigDecimal(row.getCell(57, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrSeNow(new BigDecimal(row.getCell(58, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrSeOldNow(new BigDecimal(row.getCell(59, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrAlihTrmNow(new BigDecimal(row.getCell(60, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtstNwjrPbaikKursNow(new BigDecimal(row.getCell(61, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrRekonNow(new BigDecimal(row.getCell(62, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrHapusNow(new BigDecimal(row.getCell(63, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrTrfOutNow(new BigDecimal(row.getCell(64, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrSlsBltNow(new BigDecimal(row.getCell(65, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrKoreksiNow(new BigDecimal(row.getCell(66, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrAlihSrhNow(new BigDecimal(row.getCell(67, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrPbaikKursNow(new BigDecimal(row.getCell(68, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMtskNwjrProsesHpsNow(new BigDecimal(row.getCell(69, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setNwjrLkbunNow(new BigDecimal(row.getCell(70, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setKetNoindukSeNow(row.getCell(71, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                product.setTarifSusutNormal(new BigDecimal(row.getCell(72, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setTarifSusutTmbhn(new BigDecimal(row.getCell(73, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setTarifSusutSisa(new BigDecimal(row.getCell(74, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setFlagMasaMft(row.getCell(75, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setMasaMft(new BigDecimal(row.getCell(76, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setMasaMftTmbhn(new BigDecimal(row.getCell(77, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setUmurEfktfSdThIp(new BigDecimal(row.getCell(78, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setUmurEfktfSdBlnIp(new BigDecimal(row.getCell(79, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setUmurEfktfPrev(new BigDecimal(row.getCell(80, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setUmurEfktfNow(new BigDecimal(row.getCell(81, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setSisaUmurEfktfSdIp(new BigDecimal(row.getCell(82, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setSisaUmurEfktfSdNow(new BigDecimal(row.getCell(83, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setUmurHitungAkumSusut(new BigDecimal(row.getCell(84, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setAkumSusutPrev(new BigDecimal(row.getCell(85, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setNilbukuPrev(new BigDecimal(row.getCell(86, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setSusutNow(new BigDecimal(row.getCell(87, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setKoreksiSusutNow(new BigDecimal(row.getCell(88, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setAkumSusutNow(new BigDecimal(row.getCell(89, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setNilbukuNow(new BigDecimal(row.getCell(90, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setSusutPerSmt(new BigDecimal(row.getCell(91, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getNumericCellValue()));
+	                product.setKet(row.getCell(92, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                product.setAsal(row.getCell(93, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).toString());
+	                //product.setNeracaCalk(row.getCell(94, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getStringCellValue());
+	                product.setTglPelaporan(row.getCell(95, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getDateCellValue());
+	               
+	               
+	                //cuid cdate
+	                String vstatusdata = "1";
+	        		String vcuid = (String) session.getAttribute("attr_nama");
+	        		Date vcdate = new Date();
+	        		product.setCuid(vcuid);
+	        		product.setCdate(vcdate);
+	        		product.setStatusData(vstatusdata);
+	        		//System.out.println("product: "+product.getKodeAsset());
+	        		product.setIdLkbunMaster(_idLkbunMaster);
+	                productList.add(product);
+	                //save one by one instead of all by one
+	                pbHbmMutasiDetailService.upload(product);
+	            }
+	            
+	            workbook.close();
+	        }
+
+	        //kkksHbmPenilaianService.upload(productList);
+	        //return new ResponseEntity<>(productList, status);
+	        return msg;
+			
+			
+			
+		} catch(IOException e) {
+			throw new IllegalArgumentException("Unable to load ", e);
+			
+		}
+    }
+}

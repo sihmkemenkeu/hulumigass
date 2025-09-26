@@ -1,0 +1,32 @@
+package org.djkn.hulumigas.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.djkn.hulumigas.entity.KkksTanahLkbunDetail;
+import org.djkn.hulumigas.entity.PbTanah;
+import org.djkn.hulumigas.entity.PbTanahMutasiDetail;
+import org.springframework.web.bind.annotation.RequestBody;
+
+public interface PbTanahMutasiDetailService {
+	public List<PbTanahMutasiDetail> getAll(Integer idLkbunMaster,String jnsLkpp,String kondisi,String kodeBarang,String lokasi,Integer noMin,Integer noMax);
+	public Integer totalRow(Integer idLkbunMaster,String jnsLkpp,String kondisi,String kodeBarang,String lokasi);
+	public Integer cekRowEksis(Integer idLkbunMaster,String kodeBarang); //validasi sblm save data
+    //public void generateDataPeriodeSblm(Integer idLkbunMaster);
+	public List<PbTanahMutasiDetail> getAset(Integer idHbmLkbun);
+    public void generateDataBaru(Integer v_id_lkbun_master, String v_nama_user,String v_kode_kkks, String v_bulan, String v_tahun, String v_bulan_prev, String v_tahun_prev);
+    public void generateMutasi(Integer v_id_lkbun_master, String v_nama_user,String v_kode_kkks, String v_bulan, String v_tahun, String v_bulan_prev, String v_tahun_prev);
+    public void koreksiManual(Integer v_id_lkbun_master);
+    public void editKertasKerja(Integer idHbmLkbun,String kertasKerja, BigDecimal mtstRekonNow, BigDecimal mtskRekonNow, BigDecimal mtstNwjrRekonNow, BigDecimal mtskNwjrRekonNow, BigDecimal prosesHapusNow,String ipNonIp,BigDecimal kursBiNow);    
+    public void updateNilWjr(Integer v_id_lkbun_master);
+    public void kembaliKeKoreksiManual(Integer v_id_lkbun_master);
+    public Boolean importData(@RequestBody List<PbTanahMutasiDetail> dataList);
+    public void upload(PbTanahMutasiDetail product);
+    public void deleteById(Integer idLkbunMaster);
+    //public List<RefProsesLkbun> getAll (String kodeKkks,String tahun, String bulan);
+    //public List<KkksHbmLkbunDetail> findAll();
+    public void updateManualReklas(Integer v_id_mp_lkbun,String v_flag_reklas,String v_jns_lkpp1,String v_ket);
+    public void updateManualNonReklas(Integer v_id_mp_lkbun,String v_flag_reklas,String v_jns_lkpp1,String v_ket);
+	public void resetProsesLkbun(Integer v_id_lkbun_master);
+    
+}

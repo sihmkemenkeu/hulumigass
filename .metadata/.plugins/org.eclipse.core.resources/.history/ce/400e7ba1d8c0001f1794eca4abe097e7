@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.djkn.hulumigas.mapper.PbTanahLkbunDetailMapper">
+<resultMap id="BaseResultMap"  type="KkksTanahLkbunDetail" >
+<result column="id_tnh_lkbun"  property="idTnhLkbun"  jdbcType="DECIMAL" />
+<result column="id_lkbun_master"  property="idLkbunMaster"  jdbcType="DECIMAL" />
+<result column="jns_lkpp"  property="jnsLkpp"  jdbcType="VARCHAR" />
+<result column="kertas_kerja"  property="kertasKerja"  jdbcType="VARCHAR" />
+<result column="pscid"  property="pscid"  jdbcType="VARCHAR" />
+<result column="blockcode"  property="blockcode"  jdbcType="VARCHAR" />
+<result column="kode_kkks"  property="kodeKkks"  jdbcType="VARCHAR" />
+<result column="tahun"  property="tahun"  jdbcType="VARCHAR" />
+<result column="bulan"  property="bulan"  jdbcType="VARCHAR" />
+<result column="kode_barang"  property="kodeBarang"  jdbcType="VARCHAR" />
+<result column="nama_barang"  property="namaBarang"  jdbcType="VARCHAR" />
+<result column="tgl_pelaporan"  property="tglPelaporan"  jdbcType="DATE" />
+<result column="status_data"  property="statusData"  jdbcType="VARCHAR" />
+<result column="cdate"  property="cdate"  jdbcType="DATE" />
+<result column="cuid"  property="cuid"  jdbcType="VARCHAR" />
+<result column="mdate"  property="mdate"  jdbcType="DATE" />
+<result column="muid"  property="muid"  jdbcType="VARCHAR" />
+<result column="nama_kkks"  property="namaKkks"  jdbcType="DECIMAL" />
+<result column="wilayah_kerja"  property="wilayahKerja"  jdbcType="DECIMAL" />
+<result column="tgl_terminasi"  property="tglTerminasi"  jdbcType="DATE" />
+<result column="lokasi"  property="lokasi"  jdbcType="VARCHAR" />
+<result column="tgl_prlh"  property="tglPrlh"  jdbcType="DATE" />
+<result column="tgl_ip"  property="tglIp"  jdbcType="DATE" />
+<result column="luas_awal"  property="luasAwal"  jdbcType="DECIMAL" />
+<result column="luas_mts_plus"  property="luasMtsPlus"  jdbcType="DECIMAL" />
+<result column="luas_mts_min"  property="luasMtsMin"  jdbcType="DECIMAL" />
+<result column="luas_akhir"  property="luasAkhir"  jdbcType="DECIMAL" />
+<result column="prlh_awal"  property="prlhAwal"  jdbcType="DECIMAL" />
+<result column="prlh_mts_plus"  property="prlhMtsPlus"  jdbcType="DECIMAL" />
+<result column="prlh_mts_min"  property="prlhMtsMin"  jdbcType="DECIMAL" />
+<result column="prlh_akhir"  property="prlhAkhir"  jdbcType="DECIMAL" />
+<result column="ket_mutasi"  property="ketMutasi"  jdbcType="VARCHAR" />
+<result column="nilai_wajar"  property="nilaiWajar"  jdbcType="DECIMAL" />
+<result column="kepemlkn_status_now"  property="kepemlknStatusnow"  jdbcType="VARCHAR" />
+<result column="kepemlkn_no_tgl"  property="kepemlknNoTgl"  jdbcType="VARCHAR" />
+<result column="kepemlkn_nama"  property="kepemlknNama"  jdbcType="VARCHAR" />
+<result column="peruntukan"  property="peruntukan"  jdbcType="VARCHAR" />
+<result column="koordinat"  property="koordinat"  jdbcType="VARCHAR" />
+<result column="status_penggunaan"  property="statusPenggunaan"  jdbcType="VARCHAR" />
+<result column="kondisi"  property="kondisi"  jdbcType="VARCHAR" />
+<result column="permasalahan"  property="permasalahan"  jdbcType="VARCHAR" />
+<result column="status_sertif_pemerintah"  property="statusSertifPemerintah"  jdbcType="VARCHAR" />
+<result column="tgl_pelaporan"  property="tglPelaporan"  jdbcType="DATE" />
+<result column="pngaman_stat_srtfkasi"  property="pngamanStatSrtfkasi"  jdbcType="VARCHAR" />
+<result column="ket_lain"  property="ketLain"  jdbcType="VARCHAR" />
+
+    </resultMap>
+    
+    <!--Query all-->
+    <select id="getAll" resultType="KkksTanahLkbunDetail">
+    select * from (
+        select 
+        Row_Number() OVER (ORDER BY 'kode_barang' ) NUM,
+		id_tnh_lkbun as idTnhLkbun,
+		id_lkbun_master as idLkbunMaster,
+		jns_lkpp as jnsLkpp,
+		kertas_kerja as kertasKerja,
+		pscid as pscid,
+		blockcode as blockcode,
+		kode_kkks as kodeKkks,
+		tahun as tahun,
+		bulan as bulan,
+		kode_barang as kodeBarang,
+		nama_barang as namaBarang,
+		lokasi as lokasi,
+		tgl_prlh as tglPrlh,
+		luas_awal as luasAwal,
+		luas_mts_plus as luasMtsPlus,
+		luas_mts_min as luasMtsMin,
+		luas_akhir as luasAkhir,
+		prlh_awal as prlhAwal,
+		prlh_mts_plus as prlhMtsPlus,
+		prlh_mts_min as prlhMtsMin,
+		prlh_akhir as prlhAkhir,
+		tgl_ip as tglIp,
+		nilai_wajar as nilaiWajar,
+		kondisi as kondisi,
+		ket_mutasi as ketMutasi,
+		kepemlkn_status_now as kepemlknStatusnow,
+		kepemlkn_no_tgl as kepemlknNoTgl,
+		kepemlkn_nama as kepemlknNama,
+		peruntukan as peruntukan,
+		permasalahan as permasalahan,
+		status_sertif_pemerintah as statusSertifPemerintah,
+		tgl_pelaporan as tglPelaporan,
+		proses_lkbun as prosesLkbun,
+		flag_reklas as flagReklas,
+		ket_lain as ketLain,
+		status_data as statusData,
+		cdate as cdate,
+		cuid as cuid,
+		mdate as mdate,
+		muid as muid
+        from pb_tanah_lkbun_detail
+        <where>
+        	status_data = '1'
+        	and id_lkbun_master =#{idLkbunMaster}
+        	<if test = "kodeBarang !=''">
+				and kode_barang like '%'||#{kodeBarang}||'%'
+			</if>
+			<if test = "kondisi !=''">
+				and upper(kondisi) like '%'||UPPER(#{kondisi})||'%' 
+			</if>
+			<if test = "lokasi !=''">
+				and upper(lokasi) like '%'||UPPER(#{lokasi})||'%' 
+			</if>
+		</where>              
+		)
+	where NUM between #{noMin} and #{noMax}
+    </select>
+    
+    <!--
+	<choose>
+		    <when test="tahun != ''">
+		      and tahun =#{tahun} and status_data ='1'
+		    </when>
+		    <when test="kodeKkks != ''">
+		      and kode_kkks =#{kodeKkks} and status_data ='1'
+		    </when>
+		    <otherwise>
+		      and status_data ='1'
+		    </otherwise>
+		  </choose>
+	-->	  
+    <!-- rowCount -->
+    <select id="totalRow" resultType="Integer">
+    	select count(1) from pb_tanah_lkbun_detail   
+    	<where>
+        	status_data = '1'
+        	and id_lkbun_master =#{idLkbunMaster}
+        	<if test = "kodeBarang !=''">
+				and kode_barang =#{kodeBarang} 
+			</if>
+			<if test = "kondisi !=''">
+				and upper(kondisi) like '%'||UPPER(#{kondisi})||'%' 
+			</if>
+			<if test = "lokasi !=''">
+				and upper(lokasi) like '%'||UPPER(#{lokasi})||'%' 
+			</if>
+		</where>  	
+    </select>
+    
+    <!-- cekRowEksis -->
+    <select id="cekRowEksis" resultType="Integer">
+    	select count(1) from pb_tanah_lkbun_detail    
+    	<where>
+			status_data = '1'
+        	and id_lkbun_master =#{idLkbunMaster}
+        	and kode_barang =#{kodeBarang} 
+        	
+		</where>	
+    </select>
+    
+    <!--Query aset-->
+    <select id="getAset" resultType="KkksTanahLkbunDetail">
+        select 
+		id_tnh_lkbun as idTnhLkbun,
+		id_lkbun_master as idLkbunMaster,
+		jns_lkpp as jnsLkpp,
+		kertas_kerja as kertasKerja,
+		pscid as pscid,
+		blockcode as blockcode,
+		kode_kkks as kodeKkks,
+		tahun as tahun,
+		bulan as bulan,
+		kode_barang as kodeBarang,
+		nama_barang as namaBarang,
+		lokasi as lokasi,
+		tgl_prlh as tglPrlh,
+		luas_awal as luasAwal,
+		luas_mts_plus as luasMtsPlus,
+		luas_mts_min as luasMtsMin,
+		luas_akhir as luasAkhir,
+		prlh_awal as prlhAwal,
+		prlh_mts_plus as prlhMtsPlus,
+		prlh_mts_min as prlhMtsMin,
+		prlh_akhir as prlhAkhir,
+		tgl_ip as tglIp,
+		nilai_wajar as nilaiWajar,
+		ket_mutasi as ketMutasi,
+		kepemlkn_status_now as kepemlknStatusnow,
+		kepemlkn_no_tgl as kepemlknNoTgl,
+		kepemlkn_nama as kepemlknNama,
+		peruntukan as peruntukan,
+		kondisi as kondisi,
+		permasalahan as permasalahan,
+		status_sertif_pemerintah as statusSertifPemerintah,
+		tgl_pelaporan as tglPelaporan,
+		flag_reklas as flagReklas,
+		status_data as statusData,
+		cdate as cdate,
+		cuid as cuid,
+		mdate as mdate,
+		muid as muid
+        from pb_tanah_lkbun_detail
+        <where>
+        	status_data = '1'
+        	and id_tnh_lkbun =#{idTnhLkbun}       	
+		</where>              
+	
+    </select>
+    
+   <select id="generateDataBaru" statementType="CALLABLE" useCache="false" >
+        {call TNH_GENERATE_DATA_AWAL(
+            #{v_id_lkbun_master, mode=IN},
+            #{v_nama_user, mode=IN},
+            #{v_kode_kkks, mode=IN},
+            #{v_bulan, mode=IN},
+            #{v_tahun, mode=IN},
+            #{v_bulan_prev, mode=IN},
+            #{v_tahun_prev, mode=IN}
+        )}
+    </select>
+   
+    <select id="generateMutasi" statementType="CALLABLE" useCache="false" >
+        {call TNH_MUTASI_TAMBAH_ASET(
+            #{v_id_lkbun_master, mode=IN},
+            #{v_nama_user, mode=IN},
+            #{v_kode_kkks, mode=IN},
+            #{v_bulan, mode=IN},
+            #{v_tahun, mode=IN},
+            #{v_bulan_prev, mode=IN},
+            #{v_tahun_prev, mode=IN}
+        )}
+    </select>
+    
+ 
+   <select id="koreksiManual" statementType="CALLABLE" useCache="false" >
+        {call TNH_KOREKSI_MANUAL(
+            #{v_id_lkbun_master, mode=IN}
+        )}
+    </select>
+  
+  
+   <select id="updateNilWjr" statementType="CALLABLE" useCache="false" >
+        {call TNH_UPDATE_NILAI_WAJAR(
+            #{v_id_lkbun_master, mode=IN}
+        )}
+    </select>
+    
+ 
+   <select id="kembaliKeKoreksiManual" statementType="CALLABLE" useCache="false" >
+        {call TNH_KEMBALI_KOREKSI_MANUAL(
+            #{v_id_lkbun_master, mode=IN}
+        )}
+    </select>
+   
+  
+   <insert id="save"  useGeneratedKeys="true" >
+   <selectKey keyProperty="idLkbunMaster" resultType="Integer" order="BEFORE">
+        select SEQ_PB_TANAH_LKBUN_MASTER.nextval from dual  
+   </selectKey> 
+        insert into pb_tanah_lkbun_master(id_lkbun_master,kode_kkks,pscid,blockcode,tahun_interkon,bulan_interkon,tahun,bulan,jns_aset,jns_lkbun,status_lkbun,ket,tgl_pelaporan,status_data,cuid,cdate) 
+        values(#{idLkbunMaster},#{kodeKkks},#{pscid},#{blockcode},#{tahunInterkon},#{bulanInterkon},#{tahun},#{bulan},#{jnsAset},#{jnsLkbun},#{statusLkbun},#{ket},#{cdate},#{statusData},#{cuid},#{cdate})
+    </insert>
+    
+    <!--adopt Id delete user-->
+    <delete id="deleteById">
+    delete from pb_tanah_lkbun_detail 
+       where ID_LKBUN_MASTER =#{idLkbunMaster}
+    </delete>
+    
+    <insert id="upload" useGeneratedKeys="true" parameterType="PbTanah">
+    <selectKey keyProperty="idTnhLkbun" resultType="Long" order="BEFORE">
+        select seq_pb_tanah_lkbun_detail.nextval from dual  
+    </selectKey> 
+    INSERT into pb_tanah_lkbun_detail (
+    ID_TNH_LKBUN,
+	ID_LKBUN_MASTER,
+	JNS_LKPP,
+	KERTAS_KERJA,
+	PSCID,
+	BLOCKCODE,
+	KODE_KKKS,
+	TAHUN,
+	BULAN,
+	KODE_BARANG,
+	NAMA_BARANG,
+	LOKASI,
+	LUAS_AWAL,
+	LUAS_MTS_PLUS,
+	LUAS_MTS_MIN,
+	LUAS_AKHIR,
+	TGL_PRLH,
+	TGL_IP,
+	PRLH_AWAL,
+	PRLH_MTS_PLUS,
+	PRLH_MTS_MIN,
+	PRLH_AKHIR,
+	NILAI_WAJAR,
+	KEPEMLKN_STATUS_NOW,
+	KEPEMLKN_NO_TGL,
+	KEPEMLKN_NAMA,
+	PERUNTUKAN,
+	KONDISI,
+	PERMASALAHAN,
+	STATUS_SERTIF_PEMERINTAH,
+	KET_MUTASI,
+	TGL_PELAPORAN,
+	STATUS_DATA,
+	CDATE,
+	CUID,
+	MDATE,
+	MUID
+    )
+      	values
+      	(
+      	#{idTnhLkbun, jdbcType=DECIMAL},
+		#{idLkbunMaster, jdbcType=DECIMAL},
+		#{jnsLkpp, jdbcType=VARCHAR},
+		#{kertasKerja, jdbcType=VARCHAR},
+		#{pscid, jdbcType=VARCHAR},
+		#{blockcode, jdbcType=VARCHAR},
+		#{kodeKkks, jdbcType=VARCHAR},
+		#{tahun, jdbcType=VARCHAR},
+		#{bulan, jdbcType=VARCHAR},
+		#{kodeBarang, jdbcType=VARCHAR},
+		#{namaBarang, jdbcType=VARCHAR},
+		#{lokasi, jdbcType=VARCHAR},
+		#{luasAwal, jdbcType=DECIMAL},
+		#{luasMtsPlus, jdbcType=DECIMAL},
+		#{luasMtsMin, jdbcType=DECIMAL},
+		#{luasAkhir, jdbcType=DECIMAL},
+		#{tglPrlh, jdbcType=DATE},
+		#{tglIp, jdbcType=DATE},
+		#{prlhAwal, jdbcType=DECIMAL},
+		#{prlhMtsPlus, jdbcType=DECIMAL},
+		#{prlhMtsMin, jdbcType=DECIMAL},
+		#{prlhAkhir, jdbcType=DECIMAL},
+		#{nilaiWajar, jdbcType=DECIMAL},
+		#{kepemlknStatusnow, jdbcType=VARCHAR},
+		#{kepemlknNoTgl, jdbcType=VARCHAR},
+		#{kepemlknNama, jdbcType=VARCHAR},
+		#{peruntukan, jdbcType=VARCHAR},
+		#{kondisi, jdbcType=VARCHAR},
+		#{permasalahan, jdbcType=VARCHAR},
+		#{statusSertifPemerintah, jdbcType=VARCHAR},
+		#{ketMutasi, jdbcType=VARCHAR},
+		#{tglPelaporan, jdbcType=DATE},
+		'1',
+		#{tglPelaporan, jdbcType=DATE},
+		'',
+		'',
+		''	
+        ) 
+   </insert>
+   
+   <!--
+   <select id="updateManualReklas" statementType="CALLABLE" useCache="false" >
+   		{call TNH_REKLAS_NERACA_CALK(
+            #{v_id_tnh_lkbun, mode=IN},
+            #{v_flag_reklas, mode=IN},
+            #{v_jns_lkpp1, mode=IN},
+            #{v_ket, mode=IN}             
+        )}
+    </select>
+    
+    
+   <select id="updateManualNonReklas" statementType="CALLABLE" useCache="false" >
+   		{call TNH_NON_REKLAS_NERACA_CALK(
+           #{v_id_tnh_lkbun, mode=IN},
+            #{v_flag_reklas, mode=IN},
+            #{v_jns_lkpp1, mode=IN},
+            #{v_ket, mode=IN}             
+        )}
+    </select>
+  -->  
+</mapper>
